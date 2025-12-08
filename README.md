@@ -10,6 +10,11 @@ Die Spalten ANUMMER\_01 bis ANUMMMER\_10 repräsentieren die Artikelnummern der 
 
 ## Aufgabe C
 
+Für die Implementation wurde das Python Framework Scikit-Learn verwendet. Die Algorithem dafür belaufen sich auf Random Forest, Gradient Boosting und Support Vector Machine. Random Forest sind eine Sammlung von Decision Trees, die zusammen die Vorhersage ermitteln. Ähnlich dazu nutzt Gradient Boosting aneinandergereite
+Decision Trees um die Präzision zu verbessenn. Zuguterletzt nutzt Support Vector Machine eine lineare Regression, um die Vorhersage zu ermitteln.
+
+Für
+
 ## Aufgabe D
 
-## Aufgabe E
+Für die Evaluation wurden die F1-Score und die AUC-Score verwendet. Der höchste Macro F1-Score wurde von Gradient Boosting mit x erzielt.

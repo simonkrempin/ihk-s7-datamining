@@ -27,9 +27,24 @@ def load_data(file_path="DatenDataMiningAufgabe/DMAufgabeTrainingsdaten.csv"):
     df["DATUM_LBEST_DAY"] = df["DATUM_LBEST"].dt.day
     df = df.drop("DATUM_LBEST", axis=1)
 
+    # dropping the columns ANUMMER_01 to ANUMMER_10 as they are probably irrelevant to the task
+    df = df.drop("ANUMMER_01", axis=1)
+    df = df.drop("ANUMMER_02", axis=1)
+    df = df.drop("ANUMMER_03", axis=1)
+    df = df.drop("ANUMMER_04", axis=1)
+    df = df.drop("ANUMMER_05", axis=1)
+    df = df.drop("ANUMMER_06", axis=1)
+    df = df.drop("ANUMMER_07", axis=1)
+    df = df.drop("ANUMMER_08", axis=1)
+    df = df.drop("ANUMMER_09", axis=1)
+    df = df.drop("ANUMMER_10", axis=1)
+    df = df.drop("BESTELLIDENT", axis=1)
+
     # convert categories into one hot encoding
     df = pd.get_dummies(
-        df, columns=["Z_METHODE", "Z_CARD_ART", "TAG_BEST"], drop_first=True
+        df,
+        columns=["Z_METHODE", "Z_CARD_ART", "TAG_BEST", "Z_LAST_NAME"],
+        drop_first=True,
     )
 
     data_columns = df.drop("TARGET_BETRUG", axis=1)

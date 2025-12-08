@@ -3,34 +3,35 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix
 import pandas as pd
 
-mapping_yes_no = {"ja": 1, "nein": 0}
-
-df = pd.read_csv("DatenDataMiningAufgabe/DMAufgabeTrainingsdaten.csv", sep=";")
-
-# convert yes/no to 1/0 for sklearn to correclty generate the tree
-df["TARGET_BETRUG"] = df["TARGET_BETRUG"].map(mapping_yes_no)
-df["B_EMAIL"] = df["B_EMAIL"].map(mapping_yes_no)
-df["B_TELEFON"] = df["B_TELEFON"].map(mapping_yes_no)
-df["FLAG_LRIDENTISCH"] = df["FLAG_LRIDENTISCH"].map(mapping_yes_no)
-df["FLAG_NEWSLETTER"] = df["FLAG_NEWSLETTER"].map(mapping_yes_no)
-df["Z_LAST_NAME"] = df["Z_LAST_NAME"].map(mapping_yes_no)
-df["CHK_LADR"] = df["CHK_LADR"].map(mapping_yes_no)
-df["CHK_RADR"] = df["CHK_RADR"].map(mapping_yes_no)
-df["CHK_KTO"] = df["CHK_KTO"].map(mapping_yes_no)
-df["CHK_CARD"] = df["CHK_CARD"].map(mapping_yes_no)
-df["CHK_COOKIE"] = df["CHK_COOKIE"].map(mapping_yes_no)
-df["CHK_IP"] = df["CHK_IP"].map(mapping_yes_no)
-df["FAIL_LPLZ"] = df["FAIL_LPLZ"].map(mapping_yes_no)
-df["FAIL_LPLZORTMATCH"] = df["FAIL_LPLZORTMATCH"].map(mapping_yes_no)
-df["FAIL_RPLZ"] = df["FAIL_RPLZ"].map(mapping_yes_no)
-df["FAIL_RORT"] = df["FAIL_RORT"].map(mapping_yes_no)
-df["FAIL_RPLZORTMATCH"] = df["FAIL_RPLZORTMATCH"].map(mapping_yes_no)
-df["NEUKUNDE"] = df["NEUKUNDE"].map(mapping_yes_no)
+df = pd.read_csv(
+    "DatenDataMiningAufgabe/DMAufgabeTrainingsdaten.csv",
+    sep=";",
+    decimal=",",
+    true_values=["ja"],
+    false_values=["nein"],
+)
 
 # convert the string date into processable date values
 df["B_GEBDATUM"] = pd.to_datetime(df["B_GEBDATUM"])
+df["B_GEBDATUM_YEAR"] = df["B_GEBDATUM"].dt.year
+df["B_GEBDATUM_MONTH"] = df["B_GEBDATUM"].dt.month
+df["B_GEBDATUM_DAY"] = df["B_GEBDATUM"].dt.day
+df = df.drop("B_GEBDATUM", axis=1)
+
 df["TIME_BEST"] = pd.to_datetime(df["TIME_BEST"])
+df["TIME_BEST_HOUR"] = df["TIME_BEST"].dt.hour
+df = df.drop("TIME_BEST", axis=1)
+
 df["DATUM_LBEST"] = pd.to_datetime(df["DATUM_LBEST"])
+df["DATUM_LBEST_YEAR"] = df["DATUM_LBEST"].dt.year
+df["DATUM_LBEST_MONTH"] = df["DATUM_LBEST"].dt.month
+df["DATUM_LBEST_DAY"] = df["DATUM_LBEST"].dt.day
+df = df.drop("DATUM_LBEST", axis=1)
+
+# convert categories into one hot encoding
+df = pd.get_dummies(
+    df, columns=["Z_METHODE", "Z_CARD_ART", "TAG_BEST"], drop_first=True
+)
 
 data_columns = df.drop("TARGET_BETRUG", axis=1)
 target_column = df["TARGET_BETRUG"]
@@ -55,6 +56,14 @@ rf_model.fit(X_train, y_train)
 prediction = rf_model.predict(X_test)
 
 print("----- Random Forest -----")
-print(confusion_matrix(y_test, prediction))
+
+labels = ["Normal", "Fraud"]
+cm = confusion_matrix(y_test, prediction)
+df_cm = pd.DataFrame(
+    cm, index=[f"Actual {l}" for l in labels], columns=[f"Pred {l}" for l in labels]
+)
+
+print(df_cm)
+
 print("\n")
-print(classification_report(y_test, prediction))
+print(classification_report(y_test, prediction, zero_division=0))

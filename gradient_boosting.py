@@ -16,10 +16,11 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 gb_model = HistGradientBoostingClassifier(
-    learning_rate=0.1,
-    max_iter=100,
+    learning_rate=0.01,
+    max_iter=1000,
     class_weight="balanced",
-    early_stopping=True,
+    max_leaf_nodes=64,
+    early_stopping=False,
     random_state=42,
 )
 

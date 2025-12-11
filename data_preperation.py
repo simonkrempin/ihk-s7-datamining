@@ -1,7 +1,10 @@
 import pandas as pd
 
 
-def load_data(file_path="DatenDataMiningAufgabe/DMAufgabeTrainingsdaten.csv"):
+def load_data(
+    file_path="DatenDataMiningAufgabe/DMAufgabeTrainingsdaten.csv",
+    one_hot_encoding=True,
+):
     df = pd.read_csv(
         file_path,
         sep=";",
@@ -41,11 +44,12 @@ def load_data(file_path="DatenDataMiningAufgabe/DMAufgabeTrainingsdaten.csv"):
     df = df.drop("BESTELLIDENT", axis=1)
 
     # convert categories into one hot encoding
-    df = pd.get_dummies(
-        df,
-        columns=["Z_METHODE", "Z_CARD_ART", "TAG_BEST", "Z_LAST_NAME"],
-        drop_first=True,
-    )
+    if one_hot_encoding:
+        df = pd.get_dummies(
+            df,
+            columns=["Z_METHODE", "Z_CARD_ART", "TAG_BEST", "Z_LAST_NAME"],
+            drop_first=True,
+        )
 
     data_columns = None
     target_column = None

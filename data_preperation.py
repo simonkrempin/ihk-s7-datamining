@@ -20,6 +20,11 @@ def load_data(
     df["B_GEBDATUM_DAY"] = df["B_GEBDATUM"].dt.day
     df = df.drop("B_GEBDATUM", axis=1)
 
+    df["Z_CARD_VALID"] = pd.to_datetime(df["Z_CARD_VALID"], format="%m.%Y")
+    df["Z_CARD_VALID_MONTH"] = df["Z_CARD_VALID"].dt.month
+    df["Z_CARD_VALID_YEAR"] = df["Z_CARD_VALID"].dt.year
+    df = df.drop("Z_CARD_VALID", axis=1)
+
     df["TIME_BEST"] = pd.to_datetime(df["TIME_BEST"])
     df["TIME_BEST_HOUR"] = df["TIME_BEST"].dt.hour
     df = df.drop("TIME_BEST", axis=1)
@@ -43,13 +48,19 @@ def load_data(
     df = df.drop("ANUMMER_10", axis=1)
     df = df.drop("BESTELLIDENT", axis=1)
 
-    # convert categories into one hot encoding
     if one_hot_encoding:
+        # convert categories into one hot encoding
         df = pd.get_dummies(
             df,
             columns=["Z_METHODE", "Z_CARD_ART", "TAG_BEST", "Z_LAST_NAME"],
             drop_first=True,
         )
+    else:
+        # in cases where categories are supported by default we can opt in
+        df["Z_METHODE"] = df["Z_METHODE"].astype("category")
+        df["Z_CARD_ART"] = df["Z_CARD_ART"].astype("category")
+        df["TAG_BEST"] = df["TAG_BEST"].astype("category")
+        df["Z_LAST_NAME"] = df["Z_LAST_NAME"].astype("category")
 
     data_columns = None
     target_column = None

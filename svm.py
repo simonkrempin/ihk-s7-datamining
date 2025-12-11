@@ -4,6 +4,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split
 from data_preperation import load_data
 from data_visualization import display_result
+import joblib
 
 data_columns, target_column = load_data()
 
@@ -28,6 +29,8 @@ svm_pipeline = Pipeline(
 )
 
 svm_pipeline.fit(X_train, y_train)
+
+joblib.dump(svm_pipeline, "svm_model.joblib")
 
 y_pred = svm_pipeline.predict(X_test)
 

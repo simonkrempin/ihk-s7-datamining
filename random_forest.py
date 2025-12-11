@@ -2,6 +2,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from data_preperation import load_data
 from data_visualization import display_result
+import joblib
 
 data_columns, target_column = load_data()
 
@@ -21,6 +22,8 @@ rf_model = RandomForestClassifier(
 )
 
 rf_model.fit(X_train, y_train)
+
+joblib.dump(rf_model, "rf_model.joblib")
 
 prediction = rf_model.predict(X_test)
 

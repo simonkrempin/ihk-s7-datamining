@@ -27,7 +27,7 @@ def load_data(file_path="DatenDataMiningAufgabe/DMAufgabeTrainingsdaten.csv"):
     df["DATUM_LBEST_DAY"] = df["DATUM_LBEST"].dt.day
     df = df.drop("DATUM_LBEST", axis=1)
 
-    # dropping the columns ANUMMER_01 to ANUMMER_10 as they are probably irrelevant to the task
+    # dropping the columns ANUMMER_01 to ANUMMER_10 and BESTELLIDENT as they are probably irrelevant to the task
     df = df.drop("ANUMMER_01", axis=1)
     df = df.drop("ANUMMER_02", axis=1)
     df = df.drop("ANUMMER_03", axis=1)
@@ -47,6 +47,13 @@ def load_data(file_path="DatenDataMiningAufgabe/DMAufgabeTrainingsdaten.csv"):
         drop_first=True,
     )
 
-    data_columns = df.drop("TARGET_BETRUG", axis=1)
-    target_column = df["TARGET_BETRUG"]
+    data_columns = None
+    target_column = None
+
+    if "TARGET_BETRUG" in df.columns:
+        data_columns = df.drop("TARGET_BETRUG", axis=1)
+        target_column = df["TARGET_BETRUG"]
+    else:
+        data_columns = df
+
     return data_columns, target_column

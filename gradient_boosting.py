@@ -3,6 +3,7 @@ from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.inspection import permutation_importance
 from data_preperation import load_data
 from data_visualization import display_result
+import joblib
 
 data_columns, target_column = load_data()
 
@@ -23,6 +24,8 @@ gb_model = HistGradientBoostingClassifier(
 )
 
 gb_model.fit(X_train, y_train)
+
+joblib.dump(gb_model, "gb_model.joblib")
 
 prediction = gb_model.predict(X_test)
 

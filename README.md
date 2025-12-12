@@ -10,13 +10,13 @@ Die Spalten ANUMMER\_01 bis ANUMMMER\_10 repräsentieren die Artikelnummern der 
 
 ## Aufgabe C
 
-Für die Implementation wurde das Python Framework Scikit-Learn verwendet. Scikit-Learn bietet eine umfassende Sammlung an Werkzeugen für *predictive data analysis*, darunter Klassifizierung, Regression und Clustering. Für die Aufgaben wurden die Algorithmen Random Forest, Gradient Boosting und Support Vector Machine ausgewählt. Random Forest ist ein Ensemble von Entscheidungsbäumen, die zusammen die Vorhersage ermitteln, entweder über den Durchschnittswert oder Mehrheitsentscheidung. Ähnlich dazu ist Gradient Boosting ein sequenzielles Ensemble, also nacheinander trainierte Entscheidungsbäume, die versuchen die Fehler des vorherigen Baums auszugleichen. Mit den beiden Algorithmen stehen Varianz und Bias gegenüber, oder auch reduziertes Overfitting gegen erhöhte Präzision. Zuguterletzt versucht Support Vector Machine eine Trennlinie zwischen die Datenpunkte zu ziehen, um die Daten zu kategorisieren und basierend darauf eine Vorhersage zu treffen.
-
-## Aufgabe D
-
 Theoretische Grundlagen:
 
 - **Overfitting**: Lernt die Trainingsdaten auswendig
 - **Underfitting**: Model ist nicht komplex genug
 
-Für die Evaluation wurden die F1-Score und die AUC-Score verwendet. Der höchste Macro F1-Score wurde von Gradient Boosting mit 0.58 erzielt.Deswegen bietet er die Grundlage für den Klassifizierungsdatensatz. Mithilfe von
+Für die Implementation wurde das Python Framework Scikit-Learn verwendet. Scikit-Learn bietet eine umfassende Sammlung an Werkzeugen für *predictive data analysis*, darunter Klassifizierung, Regression und Clustering. Für die Aufgaben wurden die Algorithmen Random Forest, Gradient Boosting und Support Vector Machine ausgewählt. Random Forest ist ein Ensemble von Entscheidungsbäumen, die zusammen die Vorhersage ermitteln, entweder über den Durchschnittswert oder Mehrheitsentscheidung. Ähnlich dazu ist Gradient Boosting ein sequenzielles Ensemble, also nacheinander trainierte Entscheidungsbäume, die versuchen die Fehler des vorherigen Baums auszugleichen. Mit den beiden Algorithmen stehen Varianz und Bias gegenüber, oder auch reduziertes Overfitting gegen erhöhte Präzision. Zuguterletzt versucht Support Vector Machine eine Trennlinie zwischen die Datenpunkte zu ziehen, um die Daten zu kategorisieren und basierend darauf eine Vorhersage zu treffen.
+
+## Aufgabe D
+
+Für die Evaluation wurde der Macro F1-Score als primäres Entscheidungskriterium genommen. Mit 0.58 hat Gradient Boosting am besten abgeschnitten und wird damit für die Vorhersage des Benchmarkdatensatzes verwendet.

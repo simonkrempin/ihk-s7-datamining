@@ -14,14 +14,17 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 svm_pipeline = Pipeline(
     [
-        ("scaler", StandardScaler()),
+        (
+            "scaler",
+            StandardScaler(),
+        ),  # needed to align relative size of "vectors" # needed to align relative size of "vectors"
         (
             "svm",
             SVC(
-                kernel="rbf",
+                kernel="rbf",  # curved boundaries
                 class_weight="balanced",
-                C=1.0,
-                probability=True,
+                C=1.0,  # penality for misclassification
+                probability=True,  # distance to probability
                 random_state=42,
             ),
         ),

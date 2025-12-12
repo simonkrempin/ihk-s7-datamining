@@ -6,6 +6,7 @@ import joblib
 
 data_columns, target_column = load_data()
 
+# X = Set of known features, y predicted class
 X_train, X_test, y_train, y_test = train_test_split(
     data_columns,
     target_column,

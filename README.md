@@ -24,11 +24,12 @@ Für die Evaluation wurde der Macro F1-Score als primäres Entscheidungskriteriu
 # Projekt starten
 
 uv installieren (https://docs.astral.sh/uv/getting-started/installation/#__tabbed_1_2)
+
 Dann
 - uv run svm.py für SVM
 - uv run gradient_boosting.py für Gradient Boosting
 - uv run random_forest für Random Forest
 
-Mit uv run main.py kann dann ein Algorithmus für die Echtdaten ausgewählt werden
+Mit uv run main.py kann dann ein Algorithmus mit den Pfeiltasten und Enter für die Echtdaten ausgewählt werden
 
 Die Branches svm, gb und rf Dokumentieren den Code für die Messungen der Paramter inklusive Matrizen (Skripte laufen möglicherweise etwas länger)

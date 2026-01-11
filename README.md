@@ -20,3 +20,15 @@ Für die Implementation wurde das Python Framework Scikit-Learn verwendet. Sciki
 ## Aufgabe D
 
 Für die Evaluation wurde der Macro F1-Score als primäres Entscheidungskriterium genommen. Mit 0.58 hat Gradient Boosting am besten abgeschnitten und wird damit für die Vorhersage des Benchmarkdatensatzes verwendet.
+
+# Projekt starten
+
+uv installieren (Guide)
+Dann
+- uv run svm.py für SVM
+- uv run gradient_boosting.py für Gradient Boosting
+- uv run random_forest für Random Forest
+
+Mit uv run main.py kann dann ein Algorithmus für die Echtdaten ausgewählt werden
+
+Die Branches svm, gb und rf Dokumentieren den Code für die Messungen der Paramter inklusive Matrizen (Skripte laufen möglicherweise etwas länger)

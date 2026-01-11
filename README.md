@@ -23,7 +23,7 @@ Für die Evaluation wurde der Macro F1-Score als primäres Entscheidungskriteriu
 
 # Projekt starten
 
-uv installieren (Guide)
+uv installieren (https://docs.astral.sh/uv/getting-started/installation/#__tabbed_1_2)
 Dann
 - uv run svm.py für SVM
 - uv run gradient_boosting.py für Gradient Boosting
